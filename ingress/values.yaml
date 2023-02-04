@@ -3,3 +3,5 @@ spec:
     server: https://kubernetes.default.svc
   nginx:
     targetRevision: 4.4.2
+  cert:
+    targetRevision: 1.11.0

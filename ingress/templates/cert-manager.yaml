@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "ingress-nginx"
+  name: cert-manager
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: "ingress-nginx"
+    namespace: cert-manager
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
     path: ""
-    repoURL: "https://kubernetes.github.io/ingress-nginx"
-    targetRevision: {{ .Values.spec.nginx.targetRevision }}
+    repoURL: "https://charts.jetstack.io"
+    targetRevision: {{ .Values.spec.cert.targetRevision }}
     helm:
       parameters:
         - name: installCRDs
           value: 'true'
-    chart: "ingress-nginx"
+    chart: cert-manager
