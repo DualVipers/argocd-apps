@@ -1,5 +1,5 @@
 spec:
   destination:
     server: https://kubernetes.default.svc
-  ingress-nginx:
+  nginx:
     targetRevision: 4.4.2
