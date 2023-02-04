@@ -1,6 +1,5 @@
 spec:
     destination:
         server: https://kubernetes.default.svc
-    source:
-        repoURL: https://github.com/DualVipers/argocd-apps
-        targetRevision: live
+    ingress-nginx:
+        targetRevision: 4.4.2
