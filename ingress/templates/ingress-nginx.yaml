@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-    name: ingress-nginx
-    namespace: argocd
-    finalizers:
-        - resources-finalizer.argocd.argoproj.io
+  name: ingress-nginx
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
-    destination:
-        namespace: ingress-nginx
-        server: { { .Values.spec.destination.server } }
-    project: default
-    source:
-        path: ""
-        repoURL: "https://kubernetes.github.io/ingress-nginx"
-        targetRevision: { { .Values.spec.ingress-nginx.targetRevision } }
-        helm:
-            valueFiles: []
-            values: ""
-            parameters: []
-        chart: ingress-nginx
+  destination:
+    namespace: ingress-nginx
+    server: { { .Values.spec.destination.server } }
+  project: default
+  source:
+    path: ""
+    repoURL: "https://kubernetes.github.io/ingress-nginx"
+    targetRevision: { { .Values.spec.ingress-nginx.targetRevision } }
+    helm:
+      valueFiles: []
+      values: ""
+      parameters: []
+    chart: ingress-nginx
