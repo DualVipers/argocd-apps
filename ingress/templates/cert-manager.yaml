@@ -11,7 +11,7 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: ""
+    path: ''
     repoURL: "https://charts.jetstack.io"
     targetRevision: {{ .Values.spec.cert.targetRevision }}
     helm:
