@@ -1,2 +1,4 @@
 spec:
   url: argocd.dualvs.dev
+  cert:
+   email: joseph@dualvs.com
