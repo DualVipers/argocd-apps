@@ -17,7 +17,7 @@ spec:
     helm:
       parameters:
         - name: prometheus.replicaCount
-          value: 2
+          value: "2"
         
         # Resource Limits
         - name: prometheus.resources.requests.cpu
@@ -30,11 +30,11 @@ spec:
           value: 4096Mi
         
         - name: prometheus.thanos.create
-          value: true
+          value: "true"
         - name: prometheus.retention
           value: 12h
         - name: prometheus.disableCompaction
-          value: true
+          value: "true"
         - name: prometheus.thanos.objectStorageConfig.secretName
           value: thanos-objstore-config
         - name: prometheus.thanos.objectStorageConfig.secretKey

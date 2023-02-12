@@ -4,4 +4,4 @@ metadata:
   name: "thanos-objstore-config"
 type: Opaque
 data:
-  thanos.yaml: {{ .Values.spec.retention }}
+  thanos.yaml: {{ .Values.spec.retention | b64enc | quote }}
