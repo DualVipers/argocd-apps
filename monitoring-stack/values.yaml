@@ -9,5 +9,5 @@ spec:
       endpoint: <s3-region>
       access_key: <s3-access-key>
       secret_key: <s3-secret-key>
-  kube-prometheus:
+  prometheus:
     targetRevision: 8.3.5

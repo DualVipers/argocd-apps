@@ -13,7 +13,7 @@ spec:
   source:
     path: ''
     repoURL: "https://charts.bitnami.com/bitnami"
-    targetRevision: {{ .Values.spec.kube-prometheus.targetRevision }}
+    targetRevision: {{ .Values.spec.prometheus.targetRevision }}
     helm:
       parameters:
         - name: prometheus.replicaCount
