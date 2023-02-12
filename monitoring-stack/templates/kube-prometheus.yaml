@@ -40,3 +40,6 @@ spec:
         - name: prometheus.thanos.objectStorageConfig.secretKey
           value: thanos.yaml
     chart: kube-prometheus
+  syncPolicy:
+    syncOptions:
+      - Replace=true
