@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: monitoring
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.spec.destination.project }}
+  source:
+    path: ''
+    repoURL: "https://charts.bitnami.com/bitnami"
+    targetRevision: {{ .Values.spec.kube-prometheus.targetRevision }}
+    helm:
+      parameters:
+        - name: prometheus.replicaCount
+          value: 2
+        
+        # Resource Limits
+        - name: prometheus.resources.requests.cpu
+          value: 512m
+        - name: prometheus.resources.requests.memory
+          value: 3072Mi
+        - name: prometheus.resources.limits.cpu
+          value: 512m
+        - name: prometheus.resources.limits.memory
+          value: 4096Mi
+        
+        - name: prometheus.thanos.create
+          value: true
+        - name: prometheus.retention
+          value: 12h
+        - name: prometheus.disableCompaction
+          value: true
+        - name: prometheus.thanos.objectStorageConfig.secretName
+          value: thanos-objstore-config
+        - name: prometheus.thanos.objectStorageConfig.secretKey
+          value: thanos.yaml
+    chart: kube-prometheus

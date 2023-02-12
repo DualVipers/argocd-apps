@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "thanos-objstore-config"
+type: Opaque
+data:
+  thanos.yaml: {{ .Values.spec.retention }}
