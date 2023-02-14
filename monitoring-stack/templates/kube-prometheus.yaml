@@ -28,7 +28,13 @@ spec:
           value: 512m
         - name: prometheus.resources.limits.memory
           value: 4096Mi
-        
+
+        # PVCs 
+        - name: prometheus.persistence.enabled
+          value: "true"
+        - name: prometheus.persistence.storageClass
+          value: do-block-storage
+
         - name: prometheus.thanos.create
           value: "true"
         - name: prometheus.retention
