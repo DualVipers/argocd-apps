@@ -45,7 +45,7 @@ spec:
 
         # Bucket Web
         - name: bucketweb.enabled
-          value: "false"
+          value: "true"
         
         # Compactor
         - name: compactor.enabled
