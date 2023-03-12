@@ -11,3 +11,4 @@ spec:
       secret_key: <s3-secret-key>
   thanos:
     targetRevision: 12.2.0
+    stores: dnssrv+_grpc._tcp.kube-prometheus-prometheus-thanos.monitoring.svc.<domain_name>:10901

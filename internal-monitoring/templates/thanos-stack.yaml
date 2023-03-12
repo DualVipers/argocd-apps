@@ -34,10 +34,10 @@ spec:
         # Query
         - name: query.enabled
           value: "true"
-        - name: query.dnsDiscovery.sidecarsService
-          value: "true"
-        - name: query.dnsDiscovery.sidecarsNamespace
-          value: monitoring
+        - name: query.dnsDiscovery.enabled
+          value: "false"
+        - name: query.stores
+          value: {{ print "{" .Values.spec.thanos.stores "}" | quote }}
 
         # Query Frontend
         - name: queryFrontend.enabled
