@@ -16,8 +16,14 @@ spec:
     targetRevision: {{ .Values.spec.thanos.targetRevision }}
     helm:
       parameters:
-        - name: existingObjstoreSecret
-          value: internal-thanos-objstore-config
+        - name: objstoreConfig
+          value: |-
+            type: {{ .Values.spec.objstoreConfig.type }}
+            config:
+              bucket: {{ .Values.spec.objstoreConfig.config.bucket }}
+              endpoint: {{ .Values.spec.objstoreConfig.config.endpoint }}
+              access_key: {{ .Values.spec.objstoreConfig.config.access_key }}
+              secret_key: {{ .Values.spec.objstoreConfig.config.secret_key }}
         - name: metrics.enabled
           value: "true"
         
