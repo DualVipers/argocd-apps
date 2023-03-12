@@ -49,6 +49,3 @@ spec:
         - name: ruler.enabled
           value: "false"
     chart: thanos
-  syncPolicy:
-    syncOptions:
-      - Replace=true
