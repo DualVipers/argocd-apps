@@ -11,5 +11,3 @@ spec:
       secret_key: <s3-secret-key>
   thanos:
     targetRevision: 12.2.0
-    stores:
-      - dnssrv+_grpc._tcp.thanos-prometheus-<cluster_name>.<domain_name>:10901
