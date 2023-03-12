@@ -26,6 +26,8 @@ spec:
               secret_key: {{ .Values.spec.objstoreConfig.config.secret_key }}
         - name: metrics.enabled
           value: "true"
+        - name: metrics.serviceMonitor.enabled
+          value: "true"
         
         # Query
         - name: query.enabled
