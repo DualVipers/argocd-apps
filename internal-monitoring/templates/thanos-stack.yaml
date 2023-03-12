@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: internal-thanos-stack
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: internal-monitoring
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.spec.destination.project }}
+  source:
+    path: ''
+    repoURL: "https://charts.bitnami.com/bitnami"
+    targetRevision: {{ .Values.spec.thanos.targetRevision }}
+    helm:
+      parameters:
+        - name: existingObjstoreSecret
+          value: internal-thanos-objstore-config
+        - name: metrics.enabled
+          value: "true"
+        
+        # Query
+        - name: query.enabled
+          value: "true"
+        - name: query.dnsDiscovery.enabled
+          value: "false"
+        - name: query.stores
+          value: {{ .Values.spec.thanos.stores }}
+
+        # Query Frontend
+        - name: queryFrontend.enabled
+          value: "true"
+
+        # Bucket Web
+        - name: bucketweb.enabled
+          value: "false"
+        
+        # Compactor
+        - name: compactor.enabled
+          value: "true"
+
+        # Store Gateway
+        - name: storegateway.enabled
+          value: "true"
+        
+        # Ruler
+        - name: ruler.enabled
+          value: "true"
+    chart: thanos
+  syncPolicy:
+    syncOptions:
+      - Replace=true

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "internal-thanos-objstore-config"
+type: Opaque
+data:
+  objstore.yaml: {{ .Values.spec.objstoreConfig | toYaml | indent 4 | b64enc | quote }}

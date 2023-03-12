@@ -1,0 +1,15 @@
+spec:
+  destination:
+    project: <project_name>
+    server: https://kubernetes.default.svc
+  objstoreConfig:
+    type: s3
+    config:
+      bucket: <s3-bucket>
+      endpoint: <s3-region>
+      access_key: <s3-access-key>
+      secret_key: <s3-secret-key>
+  thanos:
+    targetRevision: 12.2.0
+    stores:
+      - dnssrv+_grpc._tcp.thanos-prometheus-<cluster_name>.<domain_name>:10901

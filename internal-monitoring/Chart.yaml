@@ -1,0 +1,9 @@
+apiVersion: v2
+name: internal-monitoring
+description: Installs the systems required for the monitoring stack system onto the internal cluster.
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.0"
