@@ -24,10 +24,10 @@ spec:
         # Query
         - name: query.enabled
           value: "true"
-        - name: query.dnsDiscovery.enabled
-          value: "false"
-        - name: query.stores
-          value: {{ .Values.spec.thanos.stores }}
+        - name: query.dnsDiscovery.sidecarsService
+          value: "true"
+        - name: query.dnsDiscovery.sidecarsNamespace
+          value: monitoring
 
         # Query Frontend
         - name: queryFrontend.enabled
@@ -47,7 +47,7 @@ spec:
         
         # Ruler
         - name: ruler.enabled
-          value: "true"
+          value: "false"
     chart: thanos
   syncPolicy:
     syncOptions:
