@@ -28,6 +28,8 @@ spec:
           value: "true"
         - name: metrics.serviceMonitor.enabled
           value: "true"
+        - name: compactor.retentionResolutionRaw
+          value: 14d
         
         # Query
         - name: query.enabled
