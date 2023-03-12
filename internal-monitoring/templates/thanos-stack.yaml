@@ -50,6 +50,8 @@ spec:
         # Compactor
         - name: compactor.enabled
           value: "true"
+        - name: compactor.extraFlags
+          value: '{--delete-delay=0s}'
 
         # Store Gateway
         - name: storegateway.enabled
