@@ -12,3 +12,7 @@ spec:
   thanos:
     targetRevision: 12.2.0
     stores: dnssrv+_grpc._tcp.kube-prometheus-prometheus-thanos.monitoring.svc.<domain_name>:10901
+  prometheus:
+    targetRevision: 45.7.1
+  grafana:
+    url: grafana.dualvs.dev

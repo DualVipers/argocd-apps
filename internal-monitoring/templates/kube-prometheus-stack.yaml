@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: internal-monitoring
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.spec.destination.project }}
+  source:
+    path: ''
+    repoURL: "https://prometheus-community.github.io/helm-charts"
+    targetRevision: {{ .Values.spec.prometheus.targetRevision }}
+    helm:
+      parameters:
+        # Grafana
+        - name: grafana.ingress.enabled
+          value: "true"
+        - name: grafana.ingress.hosts
+          value: {{ print "{" .Values.spec.grafana.url "}" | quote }}
+        - name: grafana.sidecar.datasources.url
+          value: "http://internal-thanos-stack-query-frontend.internal-monitoring.svc.cluster.local:9090"
+
+        # Alert Manager
+        - name: alertmanager.enabled
+          value: "false"
+
+        # Prometheus Operator
+        - name: prometheusOperator.enabled
+          value: "false"
+
+        # Prometheus
+        - name: prometheus.enabled
+          value: "false"
+        
+        # Rules
+        - name: defaultRules.create
+          value: "false"
+        
+        # Scrapers
+        - name: kubeApiServer.enabled
+          value: "false"
+        - name: kubelet.enabled
+          value: "false"
+        - name: kubeControllerManager.enabled
+          value: "false"
+        - name: coreDns.enabled
+          value: "false"
+        - name: kubeEtcd.enabled
+          value: "false"
+        - name: kubeScheduler.enabled
+          value: "false"
+        - name: kubeProxy.enabled
+          value: "false"
+        - name: kubeStateMetrics.enabled
+          value: "false"
+        - name: nodeExporter.enabled
+          value: "false"
+    chart: kube-prometheus-stack
+  syncPolicy:
+    syncOptions:
+      - Replace=true
