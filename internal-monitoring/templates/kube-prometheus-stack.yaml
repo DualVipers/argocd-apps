@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kube-prometheus-stack
+  name: internal-kube-prometheus-stack
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -17,12 +17,24 @@ spec:
     helm:
       parameters:
         # Grafana
+        - name: grafana.sidecar.datasources.url
+          value: "http://internal-thanos-stack-query-frontend.internal-monitoring.svc.cluster.local:9090"
+
+        # Grafana Ingress
         - name: grafana.ingress.enabled
           value: "true"
         - name: grafana.ingress.hosts
           value: {{ print "{" .Values.spec.grafana.url "}" | quote }}
-        - name: grafana.sidecar.datasources.url
-          value: "http://internal-thanos-stack-query-frontend.internal-monitoring.svc.cluster.local:9090"
+        - name: grafana.ingress.annotations.kubernetes\.io/ingress\.class
+          value: nginx
+        - name: grafana.ingress.annotations.kubernetes\.io/tls-acme
+          value: '"true"'
+        - name: grafana.ingress.annotations.cert-manager\.io/cluster-issuer
+          value: letsencrypt-prod
+        - name: grafana.ingress.tls[0].hosts[0]
+          value: {{ .Values.spec.grafana.url }}
+        - name: grafana.ingress.tls[0].secretName
+          value: grafana-tls-secret
 
         # Alert Manager
         - name: alertmanager.enabled
