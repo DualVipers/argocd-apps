@@ -18,4 +18,8 @@ spec:
       parameters:
         - name: installCRDs
           value: 'true'
+        - name: prometheus.enabled
+          value: 'true'
+        - name: prometheus.servicemonitor.enabled
+          value: 'true'
     chart: cert-manager
