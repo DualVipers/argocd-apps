@@ -36,8 +36,14 @@ spec:
           value: "true"
         - name: query.dnsDiscovery.enabled
           value: "false"
-        - name: query.stores
-          value: {{ print "{" .Values.spec.thanos.stores "}" | quote }}
+        
+        # Query Stores
+        - name: query.stores[0]
+          value: dnssrv+_grpc._tcp.internal-thanos-stack-storegateway.internal-monitoring.svc.cluster.local:10901
+        {{- range $index, $store := .Values.spec.thanos.stores }}
+        - name: query.stores[{{ add1 $index }}]
+          value: {{ $store }}
+        {{- end }}
 
         # Query Frontend
         - name: queryFrontend.enabled
